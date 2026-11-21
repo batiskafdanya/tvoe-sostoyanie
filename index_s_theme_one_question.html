@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10111a">
+  <title>Твоё состояние — бережная проверка самочувствия</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#111713; --panel:#1a211c; --panel2:#202a23; --line:#354139;
+      --text:#e8ede8; --muted:#aab5ab; --accent:#a8c3a8; --accent2:#789b7b;
+      --good:#a8c3a8; --warn:#d7c18b; --high:#d5a09a;
+    }
+    * { box-sizing:border-box }
+    body {
+      margin:0; min-height:100vh; padding:32px 16px 56px;
+      background:linear-gradient(rgba(13,19,15,.90),rgba(13,19,15,.94)),url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjIyMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDIyMDAiPgo8ZGVmcz4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiMxMTFhMTQiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE3MjMxYSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzEwMTgxMiIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJtaXN0Ij48c3RvcCBzdG9wLWNvbG9yPSIjNTI2YjUwIiBzdG9wLW9wYWNpdHk9Ii4yNiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzUyNmI1MCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8ZmlsdGVyIGlkPSJzb2Z0Ij48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI3NSIvPjwvZmlsdGVyPgo8L2RlZnM+CjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjIyMDAiIGZpbGw9InVybCgjYmcpIi8+CjxlbGxpcHNlIGN4PSIyODAiIGN5PSI0MjAiIHJ4PSI0MzAiIHJ5PSI1MjAiIGZpbGw9InVybCgjbWlzdCkiIGZpbHRlcj0idXJsKCNzb2Z0KSIvPgo8ZWxsaXBzZSBjeD0iMTMzMCIgY3k9IjkyMCIgcng9IjQ0MCIgcnk9IjY1MCIgZmlsbD0idXJsKCNtaXN0KSIgZmlsdGVyPSJ1cmwoI3NvZnQpIi8+CjxlbGxpcHNlIGN4PSI3ODAiIGN5PSIxODgwIiByeD0iNjUwIiByeT0iNDMwIiBmaWxsPSIjMjYzOTJhIiBvcGFjaXR5PSIuMTIiIGZpbHRlcj0idXJsKCNzb2Z0KSIvPgo8ZyBmaWxsPSJub25lIiBzdHJva2U9IiM4YmEyOGEiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjEwIj4KICA8cGF0aCBkPSJNMCA3NDAgUTI0MCA1NjAgNDcwIDcyMCBUOTAwIDcwMCBUMTYwMCA2MjAiLz4KICA8cGF0aCBkPSJNMCAxNTQwIFEzNjAgMTM5MCA3MjAgMTUzMCBUMTYwMCAxNDUwIi8+CiAgPHBhdGggZD0iTTEwMCAwIFEyNjAgMjUwIDE3MCA1MjAgVDI0MCA5MjAiLz4KICA8cGF0aCBkPSJNMTUwMCAwIFExMzUwIDI3MCAxNDQwIDUzMCBUMTM3MCA5MzAiLz4KPC9nPgo8ZyBmaWxsPSIjOWFhZjk4IiBvcGFjaXR5PSIuMTAiPgogIDxwYXRoIGQ9Ik0wIDcyMCBRMTMwIDUyMCAyNTAgMzUwIFEyNjAgNjEwIDAgNzIwWiIvPgogIDxwYXRoIGQ9Ik0xNjAwIDc5MCBRMTQ2MCA1NjAgMTM2MCAzOTAgUTEzMzAgNjYwIDE2MDAgNzkwWiIvPgogIDxwYXRoIGQ9Ik0wIDE3MzAgUTE4MCAxNTEwIDMzMCAxNDMwIFEyNDAgMTY5MCAwIDE3MzBaIi8+CiAgPHBhdGggZD0iTTE2MDAgMTc2MCBRMTQzMCAxNTEwIDEyODAgMTQ0MCBRMTM3MCAxNzIwIDE2MDAgMTc2MFoiLz4KPC9nPgo8L3N2Zz4=') center top / cover fixed,var(--bg);
+      color:var(--text); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    .wrap { width:min(1040px,100%); margin:auto }
+    header,.card { background:rgba(25,33,27,.94); backdrop-filter:blur(8px); border:1px solid rgba(151,171,151,.18); border-radius:16px; box-shadow:0 8px 28px rgba(0,0,0,.16); }
+    header { padding:28px; margin-bottom:18px }
+    .brand { display:flex; align-items:center; gap:11px; color:#c2d0c2; font-size:.82rem; font-weight:700; letter-spacing:.10em }
+    .brand-mark { display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:#29342c; color:#c2d0c2; font-size:19px }
+    h1 { font-size:clamp(2rem,6vw,3.1rem); line-height:1.08; margin:24px 0 12px; letter-spacing:-.04em }
+    h2 { font-size:1.35rem; margin:0 0 8px }
+    p { margin:0; color:var(--muted) }
+    .intro { max-width:610px; font-size:1.02rem }
+    .meta { display:flex; gap:9px; flex-wrap:wrap; margin-top:20px }
+    .pill { border:1px solid #435447; color:#c4d2c4; background:#27352b; padding:6px 11px; border-radius:99px; font-size:.78rem }
+    .card { padding:30px; margin-top:20px }
+    .progress-head { display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:.85rem; margin-bottom:10px }
+    .track,.meter { height:8px; background:#34443a; border-radius:99px; overflow:hidden }
+    .fill { height:100%; width:0; background:var(--accent2); transition:width .25s }
+    .question { padding:30px 0; border-bottom:1px solid var(--line) }
+    .question:last-of-type { border-bottom:0 }
+    .q-top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px }
+    .number { color:var(--accent); font-size:.75rem; font-weight:800; letter-spacing:.1em }
+    .category { color:var(--muted); font-size:.76rem }
+    .q-title { font-weight:650; margin-bottom:14px; line-height:1.4 }
+    .answers { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px }
+    .answer { cursor:pointer; border:1px solid #435247; color:#e0ece1; background:#202a23; border-radius:12px; padding:10px 5px; font:inherit; font-size:.78rem; min-height:48px; transition:.18s }
+    .answer:hover { border-color:var(--accent); transform:translateY(-1px); background:#26332a }
+    .answer[aria-pressed="true"] { background:#34483a; border-color:#9bb49d; color:#f0f4ef; box-shadow:inset 0 0 0 1px var(--accent) }
+    button:focus-visible { outline:3px solid #d3bfff; outline-offset:3px }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px }
+    .primary,.secondary { border:0; border-radius:8px; padding:13px 18px; font:inherit; font-weight:700; cursor:pointer }
+    .primary { color:#171321; background:#a8bda8; flex:1 }
+    .primary:disabled { opacity:.4; cursor:not-allowed }
+    .secondary { color:var(--text); background:#2a352d; border:1px solid var(--line) }
+    .hint { font-size:.82rem; margin-top:10px; min-height:1.3em }
+    .notice { margin-top:16px; padding:14px 16px; border-radius:9px; background:rgba(42,54,44,.55); border:1px solid #435247; color:#c5c2d3; font-size:.85rem }
+    .result-score { display:flex; align-items:center; justify-content:center; flex-direction:column; padding:22px 0 14px }
+    .score { font-size:3.6rem; font-weight:800; letter-spacing:-.06em; color:var(--accent) }
+    .score small { font-size:1rem; color:var(--muted); letter-spacing:0 }
+    .result-title { font-size:1.35rem; margin:8px 0 }
+    .result-copy { color:#c4c2d0; margin-top:8px }
+    .bar-row { margin:17px 0 }
+    .bar-label { display:flex; justify-content:space-between; gap:10px; font-size:.9rem; margin-bottom:7px }
+    .bar-label span:last-child { color:var(--accent); font-variant-numeric:tabular-nums }
+    .recommendations { padding-left:20px; color:#cfccda; margin:10px 0 0 }
+    .recommendations li { margin:8px 0 }
+    .hidden { display:none }
+    footer { text-align:center; color:#77778d; font-size:.78rem; padding:22px 10px }
+    @media(max-width:560px) {
+      body { padding:16px 10px 36px }
+      header,.card { padding:22px; border-radius:14px }
+      .answers { grid-template-columns:1fr; }
+      .answer { text-align:left; padding:11px 13px; min-height:42px; font-size:.9rem }
+      .q-top { align-items:flex-start; flex-direction:column; gap:3px }
+    }
+
+    .single-question { min-height:245px; display:flex; flex-direction:column; justify-content:center; }
+    .single-question .q-title { font-size:1.12rem; margin:18px 0 22px }
+    .done-question { text-align:center; align-items:center; }
+    .header-tools { display:flex; justify-content:flex-end; margin-bottom:12px }
+    .theme-toggle { border:1px solid var(--line); color:var(--text); background:var(--panel2); border-radius:999px; padding:9px 13px; font:inherit; font-size:.82rem; cursor:pointer }
+    .theme-toggle:hover { border-color:var(--accent) }
+    body[data-theme="light"] {
+      color-scheme:light;
+      --bg:#eee7d8; --panel:#f8f3e8; --panel2:#eee7d8; --line:#d5cbb8;
+      --text:#34372f; --muted:#777568; --accent:#71866b; --accent2:#849879;
+      --good:#71866b; --warn:#a8874e; --high:#a96f69;
+      background:linear-gradient(145deg,#f4eedf 0%,#e9e0ce 100%);
+    }
+    body[data-theme="light"] header,
+    body[data-theme="light"] .card {
+      background:rgba(250,246,236,.94);
+      border-color:rgba(125,119,98,.22);
+      box-shadow:0 8px 28px rgba(77,65,42,.08);
+    }
+    body[data-theme="light"] .brand { color:#65765e }
+    body[data-theme="light"] .brand-mark { background:#e5e8d9; color:#65765e }
+    body[data-theme="light"] .pill { border-color:#d2c9b5; color:#626e59; background:#ebe9d9 }
+    body[data-theme="light"] .track,
+    body[data-theme="light"] .meter { background:#e1dac9 }
+    body[data-theme="light"] .answer { border-color:#d3cbb9; color:#45483f; background:#f1ecdf }
+    body[data-theme="light"] .answer:hover { background:#e9eadc }
+    body[data-theme="light"] .answer[aria-pressed="true"] { background:#dfe7d7; border-color:#82977a; color:#344331 }
+    body[data-theme="light"] .primary { color:#fffdf6; background:#788d70 }
+    body[data-theme="light"] .secondary { color:var(--text); background:#eee8da; border-color:var(--line) }
+    body[data-theme="light"] .notice { background:#eeeadc; border-color:#d8cfbc; color:#626355 }
+    body[data-theme="light"] .result-copy,
+    body[data-theme="light"] .recommendations { color:#55594f }
+    body[data-theme="light"] footer { color:#817d70 }
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="header-tools"><button id="themeToggle" class="theme-toggle" type="button" aria-label="Переключить тему">☀ Светлая тема</button></div>
+    <div class="brand"><span class="brand-mark">✦</span> БЕРЕЖНОЕ САМОНАБЛЮДЕНИЕ</div>
+    <h1>Твоё состояние</h1>
+    <p class="intro">Прислушайся к себе. Пойми, как ты чувствуешь себя в последнее время. Десять коротких вопросов помогут обратить внимание на сон, энергию и эмоциональную нагрузку.</p>
+    <div class="meta"><span class="pill">10 вопросов</span><span class="pill">Около 3 минут</span></div>
+  </header>
+
+  <section id="quiz" class="card">
+    <div class="progress-head"><span>Твой опрос</span><span id="progressText">0 из 10</span></div>
+    <div class="track"><div class="fill" id="progressFill"></div></div>
+    <div id="questions"></div>
+    <div class="actions">
+      <button id="submit" class="primary" disabled>Посмотреть результат →</button>
+      <button id="reset" class="secondary" type="button">Сбросить ответы</button>
+    </div>
+    <p class="hint" id="hint" aria-live="polite">Выбери по одному ответу в каждом вопросе.</p>
+    <div class="notice">Это не медицинский или диагностический тест. Отвечай так, как действительно ощущаешь себя за последние две недели. Результат — только повод прислушаться к себе, а не ярлык.</div>
+  </section>
+
+  <section id="results" class="card hidden" aria-live="polite">
+    <div class="number">ТВОЙ РЕЗУЛЬТАТ</div>
+    <div class="result-score"><div class="score"><span id="total">0</span><small> / 40</small></div><div class="track" style="width:100%"><div class="fill" id="totalFill"></div></div></div>
+    <h2 id="resultTitle" class="result-title"></h2>
+    <p id="resultText" class="result-copy"></p>
+    <div class="notice" style="margin-top:20px">Баллы показывают только частоту выбранных тобой ответов. Они не определяют диагноз и не могут надёжно измерить психическое здоровье.</div>
+    <h2 style="margin-top:25px">По отдельным направлениям</h2>
+    <div id="breakdown"></div>
+    <h2 style="margin-top:25px">Что можно попробовать</h2>
+    <ul id="tips" class="recommendations"></ul>
+    <div class="notice">Если усталость, тревога или подавленность долго не проходят, мешают обычной жизни или усиливаются, поговори с близким взрослым, которому доверяешь, и/или медицинским специалистом. Необязательно справляться в одиночку.</div>
+    <div class="actions"><button id="again" class="primary">Пройти ещё раз</button></div>
+  </section>
+  <footer>«Твоё состояние» · Инструмент для личного самонаблюдения<br>Ответы обрабатываются в этом браузере и никуда не отправляются.</footer>
+</main>
+<script>
+
+const themeToggle = document.getElementById("themeToggle");
+function setTheme(theme) {
+  document.body.dataset.theme = theme;
+  const light = theme === "light";
+  themeToggle.textContent = light ? "☾ Тёмная тема" : "☀ Светлая тема";
+  themeToggle.setAttribute("aria-label", light ? "Включить тёмную тему" : "Включить светлую тему");
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", light ? "#eee7d8" : "#10111a");
+  try { localStorage.setItem("tvoe-sostoyanie-theme", theme); } catch (e) {}
+}
+let savedTheme = "dark";
+try { savedTheme = localStorage.getItem("tvoe-sostoyanie-theme") || "dark"; } catch (e) {}
+setTheme(savedTheme);
+themeToggle.addEventListener("click", () => {
+  setTheme(document.body.dataset.theme === "light" ? "dark" : "light");
+});
+
+const questions = [
+  {q:"Как часто ты просыпаешься уже уставшим, даже если спал достаточно?", c:"Утреннее самочувствие"},
+  {q:"Как часто тебе бывает сложно сосредоточиться на учёбе, работе или обычных делах?", c:"Концентрация"},
+  {q:"Как часто ты чувствуешь внутреннее напряжение или беспокойство без очевидной причины?", c:"Эмоциональное напряжение"},
+  {q:"Как часто привычные занятия перестают приносить удовольствие?", c:"Интерес к занятиям"},
+  {q:"Как часто ты замечаешь, что становишься раздражительным или эмоционально чувствительным?", c:"Эмоциональная устойчивость"},
+  {q:"Как часто у тебя возникают трудности со сном или нарушается привычный режим сна?", c:"Качество сна"},
+  {q:"Как часто ты ощущаешь нехватку физических сил в течение дня?", c:"Физическая энергия"},
+  {q:"Как часто тебе кажется, что повседневные задачи становятся слишком тяжёлыми?", c:"Уровень нагрузки"},
+  {q:"Как часто ты чувствуешь, что даже после отдыха не успеваешь восстановиться?", c:"Восстановление"},
+  {q:"Как часто ты ощущаешь эмоциональное истощение или отсутствие желания что-либо делать?", c:"Эмоциональное состояние"}
+];
+const options = ["Никогда","Редко","Иногда","Часто","Почти всегда"];
+const groups = [
+  {name:"Утреннее самочувствие", ids:[0]},
+  {name:"Концентрация", ids:[1]},
+  {name:"Эмоциональное напряжение", ids:[2,4,9]},
+  {name:"Интерес к занятиям", ids:[3]},
+  {name:"Сон и физическая энергия", ids:[5,6]},
+  {name:"Нагрузка и восстановление", ids:[7,8]}
+];
+let answers = Array(10).fill(null);
+const $ = id => document.getElementById(id);
+function renderQuestions() {
+  const i = answers.findIndex(value => value === null);
+  if (i === -1) {
+    $("questions").innerHTML = `
+      <article class="question single-question done-question">
+        <div class="number">ВСЕ ОТВЕТЫ ЗАПИСАНЫ</div>
+        <div class="q-title">Спасибо! Ты ответил на все 10 вопросов.</div>
+        <p>Теперь можно посмотреть результат.</p>
+      </article>`;
+    return;
+  }
+
+  const item = questions[i];
+  $("questions").innerHTML = `
+    <article class="question single-question">
+      <div class="q-top"><span class="number">ВОПРОС ${i+1} ИЗ 10</span><span class="category">${item.c}</span></div>
+      <div class="q-title">${item.q}</div>
+      <div class="answers" role="group" aria-label="Ответ на вопрос ${i+1}">
+        ${options.map((label,value)=>`<button type="button" class="answer" data-question="${i}" data-value="${value}">${label}</button>`).join("")}
+      </div>
+    </article>`;
+  document.querySelectorAll(".answer").forEach(button => button.addEventListener("click", () => {
+    answers[Number(button.dataset.question)] = Number(button.dataset.value);
+    renderQuestions();
+    updateProgress();
+  }));
+}
+function updateProgress() {
+  const count = answers.filter(v=>v!==null).length;
+  $("progressText").textContent = `${count} из 10`;
+  $("progressFill").style.width = `${count*10}%`;
+  $("submit").disabled = count !== 10;
+  $("hint").textContent = count===10 ? "Все ответы готовы — можно посмотреть результат." : `Осталось ответить: ${10-count}.`;
+}
+function showResults() {
+  const total = answers.reduce((a,b)=>a+b,0);
+  $("total").textContent = total;
+  $("totalFill").style.width = `${total/40*100}%`;
+  let title, text;
+  if(total<=10) {
+    title="Небольшая выраженность отмеченных трудностей";
+    text="В этих ответах большинство трудностей встречается редко или не встречается. Продолжай замечать, что помогает тебе отдыхать и чувствовать себя устойчивее. Даже при небольшом балле важно не игнорировать то, что тебя беспокоит.";
+  } else if(total<=20) {
+    title="Некоторые признаки усталости";
+    text="Часть трудностей время от времени даёт о себе знать. Может быть полезно присмотреться к режиму сна, нагрузке и тому, хватает ли тебе времени на восстановление.";
+  } else if(total<=30) {
+    title="Заметная нагрузка по твоим ответам";
+    text="Ты довольно часто отмечаешь признаки усталости или напряжения. Попробуй обсудить своё самочувствие с человеком, которому доверяешь, и подумать, какую нагрузку можно сделать посильнее.";
+  } else {
+    title="Много часто встречающихся трудностей";
+    text="По ответам многие из перечисленных ощущений возникают часто. Это не диагноз, но хороший повод отнестись к себе внимательно и попросить поддержки у близкого взрослого или специалиста.";
+  }
+  $("resultTitle").textContent=title;
+  $("resultText").textContent=text;
+  $("breakdown").innerHTML=groups.map(g=>{
+    const value=g.ids.reduce((s,id)=>s+answers[id],0), max=g.ids.length*4;
+    return `<div class="bar-row"><div class="bar-label"><span>${g.name}</span><span>${value} / ${max}</span></div><div class="meter"><div class="fill" style="width:${value/max*100}%"></div></div></div>`;
+  }).join("");
+  const tips = [
+    "Сон: попробуй вставать примерно в одно и то же время. Перед сном оставь спокойный промежуток без учёбы и яркого экрана, насколько это возможно.",
+    "Паузы: во время учёбы или работы периодически вставай, меняй положение тела и ненадолго переключай внимание.",
+    "Движение: короткая прогулка или лёгкая разминка могут помочь переключиться. Выбирай удобный темп и не заставляй себя через силу.",
+    "Нагрузка: запиши дела и выбери одно ближайшее действие. Большие задачи раздели на небольшие шаги; если возможно, попроси о помощи.",
+    "Поддержка: расскажи близкому человеку, которому доверяешь, что именно стало труднее. Можно прямо попросить просто выслушать или помочь с одной задачей.",
+    "Поддержка: старайся регулярно есть, пить воду и находить время на общение. Если усталость сохраняется или мешает повседневной жизни, обсуди это с врачом или психологом."
+  ];
+  $("tips").innerHTML=tips.map(t=>`<li>${t}</li>`).join("");
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function reset() {
+  answers=Array(10).fill(null);
+  renderQuestions(); updateProgress();
+  $("results").classList.add("hidden"); $("quiz").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$("submit").addEventListener("click",showResults);
+$("reset").addEventListener("click",reset);
+$("again").addEventListener("click",reset);
+renderQuestions(); updateProgress();
+</script>
+</body>
+</html>
